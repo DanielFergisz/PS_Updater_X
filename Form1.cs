@@ -16,12 +16,11 @@ namespace PS_Updater_X
 {
     public partial class Form1 : Form
     {
-              private string appPatch = System.IO.Path.Combine(Application.StartupPath, "");
+        private string appPatch = System.IO.Path.Combine(Application.StartupPath, "");
 
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -98,6 +97,11 @@ namespace PS_Updater_X
             {
                 process.Kill();
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.repairbox.pl");
         }
     }
 }
