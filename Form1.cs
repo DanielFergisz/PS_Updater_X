@@ -49,6 +49,7 @@ namespace PS_Updater_X
                 Log.SelectionColor = Color.Empty;
                 Log.AppendText(Environment.NewLine + "");
                 Log.AppendText(Environment.NewLine + "No application to update.");
+                timer6.Enabled = true;
             }
         }
 
@@ -93,15 +94,34 @@ namespace PS_Updater_X
         private void timer5_Tick(object sender, EventArgs e)
         {
             timer5.Enabled = false;
-            foreach (var process in Process.GetProcessesByName("PS_Updater_X"))
+            
+            string[] Process_name_list = {"PS_Updater_X", "Updater_PS"};
+            foreach (string Process_name in Process_name_list)
             {
-                process.Kill();
+                foreach (var process in Process.GetProcessesByName(Process_name))
+                {
+                    process.Kill();
+                }
             }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Process.Start("https://www.repairbox.pl");
+        }
+
+        private void timer6_Tick(object sender, EventArgs e)
+        {
+            timer6.Enabled = false;
+
+            string[] Process_name_list = { "PS_Updater_X", "Updater_PS" };
+            foreach (string Process_name in Process_name_list)
+            {
+                foreach (var process in Process.GetProcessesByName(Process_name))
+                {
+                    process.Kill();
+                }
+            }
         }
     }
 }
