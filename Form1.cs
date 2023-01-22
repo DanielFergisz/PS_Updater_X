@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-using ImTools;
 
 namespace PS_Updater_X
 {
@@ -33,7 +32,7 @@ namespace PS_Updater_X
         {
             timer1.Enabled = false;
 
-            if (File.Exists("PS_OS.exe"))
+            if (File.Exists("PsFirm.exe") || File.Exists("PS_OS.exe"))
             {
                 Log.SelectionColor = Color.ForestGreen;
                 Log.AppendText("OK");
@@ -56,7 +55,33 @@ namespace PS_Updater_X
         private void timer2_Tick(object sender, EventArgs e)
         {
             timer2.Enabled = false;
-            File.Move("PS_OS.exe", "PS_OS.exe.old");
+
+            if (File.Exists("PsFirm.exe"))
+            {
+                try
+                {
+                    File.Move("PsFirm.exe", "PsFirm.exe.old");
+                }
+                catch
+                {
+                    File.Delete("PsFirm.exe.old");
+                    File.Move("PsFirm.exe", "PsFirm.exe.old");
+                }
+            }
+
+            if (File.Exists("PS_OS.exe"))
+            {
+                try
+                {
+                    File.Move("PS_OS.exe", "PS_OS.exe.old");
+                }
+                catch
+                {
+                    File.Delete("PS_OS.exe.old");
+                    File.Move("PS_OS.exe", "PS_OS.exe.old");
+                }
+            }
+
             Log.SelectionColor = Color.ForestGreen;
             Log.AppendText("OK");
             Log.SelectionColor = Color.Empty;
@@ -69,7 +94,16 @@ namespace PS_Updater_X
             timer3.Enabled = false;
             WebClient client = new WebClient();
             string newVersion = client.DownloadString("http://repairbox.pl/PS_OS/latestVersion.txt");
-            client.DownloadFile("http://repairbox.pl/PS_OS/" + newVersion + "/PS_OS.exe", appPatch + "/PS_OS.exe");
+
+            try
+            {
+                client.DownloadFile("http://repairbox.pl/PS_OS/" + newVersion + "/PsFirm.exe", appPatch + "/PsFirm.exe");
+            }
+            catch
+            {
+                client.DownloadFile("http://repairbox.pl/PS_OS/LastV/PS_OS.exe", appPatch + "/PsFirm.exe");
+            }
+
             client.Dispose();
             Log.SelectionColor = Color.ForestGreen;
             Log.AppendText("OK");
@@ -86,7 +120,7 @@ namespace PS_Updater_X
             Log.SelectionColor = Color.Empty;
             Log.AppendText(Environment.NewLine + "Update completed.");
             Log.AppendText(Environment.NewLine + "");
-            Process.Start("PS_OS.exe");
+            Process.Start("PsFirm.exe");
             Log.AppendText(Environment.NewLine + "Restarting...");
             timer5.Enabled = true;
         }

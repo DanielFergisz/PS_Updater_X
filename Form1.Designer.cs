@@ -104,7 +104,7 @@ namespace PS_Updater_X
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "PS_OS Updater v1.06";
+            this.Text = "PsFirm Updater v1.07";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
