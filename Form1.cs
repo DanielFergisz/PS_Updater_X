@@ -94,7 +94,7 @@ namespace PS_Updater_X
             Log.SelectionColor = Color.ForestGreen;
             Log.AppendText("OK");
             Log.SelectionColor = Color.Empty;
-            Log.AppendText(Environment.NewLine + "Download new version.. ");
+            Log.AppendText(Environment.NewLine + "Downloading new version.. ");
             timer3.Enabled = true;
         }
 
