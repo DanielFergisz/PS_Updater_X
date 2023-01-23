@@ -26,6 +26,15 @@ namespace PS_Updater_X
         {
             Log.AppendText("Checking exe.. ");
             timer1.Enabled = true;
+
+            string[] Process_name_list = { "PS_OS", "PsFirm" };
+            foreach (string Process_name in Process_name_list)
+            {
+                foreach (var process in Process.GetProcessesByName(Process_name))
+                {
+                    process.Kill();
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -94,16 +103,9 @@ namespace PS_Updater_X
             timer3.Enabled = false;
             WebClient client = new WebClient();
             string newVersion = client.DownloadString("http://repairbox.pl/PS_OS/latestVersion.txt");
-
-            try
-            {
-                client.DownloadFile("http://repairbox.pl/PS_OS/" + newVersion + "/PsFirm.exe", appPatch + "/PsFirm.exe");
-            }
-            catch
-            {
-                client.DownloadFile("http://repairbox.pl/PS_OS/LastV/PS_OS.exe", appPatch + "/PsFirm.exe");
-            }
-
+                 
+            client.DownloadFile("http://repairbox.pl/PS_OS/" + newVersion + "/PsFirm.exe", appPatch + "/PsFirm.exe");
+           
             client.Dispose();
             Log.SelectionColor = Color.ForestGreen;
             Log.AppendText("OK");
@@ -120,9 +122,21 @@ namespace PS_Updater_X
             Log.SelectionColor = Color.Empty;
             Log.AppendText(Environment.NewLine + "Update completed.");
             Log.AppendText(Environment.NewLine + "");
-            Process.Start("PsFirm.exe");
-            Log.AppendText(Environment.NewLine + "Restarting...");
-            timer5.Enabled = true;
+            try
+            {
+                Process.Start("PsFirm.exe");
+                Log.AppendText(Environment.NewLine + "Restarting...");
+                timer5.Enabled = true;
+            }
+            catch 
+            {
+                Log.AppendText(Environment.NewLine + "Checking.. ");
+                Log.SelectionColor = Color.Red;
+                Log.AppendText("Failure !!!");
+                Log.SelectionColor = Color.Empty;
+                timer7.Enabled = true;
+            }
+            
         }
 
         private void timer5_Tick(object sender, EventArgs e)
@@ -156,6 +170,19 @@ namespace PS_Updater_X
                     process.Kill();
                 }
             }
+        }
+
+        private void timer7_Tick(object sender, EventArgs e)
+        {
+            timer7.Enabled = false;
+            WebClient client = new WebClient();
+            string newVersion = client.DownloadString("http://repairbox.pl/PS_OS/latestVersion.txt");
+
+            client.DownloadFile("http://repairbox.pl/PS_OS/LastV/PS_OS.exe", appPatch + "/PsFirm.exe");
+
+            client.Dispose();
+            timer4.Enabled = true;
+            Log.AppendText(Environment.NewLine + "Updating.. ");
         }
     }
 }

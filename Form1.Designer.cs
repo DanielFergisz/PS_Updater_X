@@ -39,15 +39,17 @@ namespace PS_Updater_X
             this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer6 = new System.Windows.Forms.Timer(this.components);
+            this.timer7 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Log
             // 
             this.Log.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Log.Location = new System.Drawing.Point(10, 10);
+            this.Log.Location = new System.Drawing.Point(32, 28);
+            this.Log.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.Log.Name = "Log";
-            this.Log.Size = new System.Drawing.Size(329, 136);
+            this.Log.Size = new System.Drawing.Size(1033, 380);
             this.Log.TabIndex = 0;
             this.Log.Text = "";
             // 
@@ -79,9 +81,10 @@ namespace PS_Updater_X
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(10, 152);
+            this.pictureBox1.Location = new System.Drawing.Point(32, 433);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(328, 35);
+            this.pictureBox1.Size = new System.Drawing.Size(1039, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -92,14 +95,20 @@ namespace PS_Updater_X
             this.timer6.Interval = 2500;
             this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
             // 
+            // timer7
+            // 
+            this.timer7.Interval = 500;
+            this.timer7.Tick += new System.EventHandler(this.timer7_Tick);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 191);
+            this.ClientSize = new System.Drawing.Size(1108, 544);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Log);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(10, 9, 10, 9);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -122,6 +131,7 @@ namespace PS_Updater_X
         private System.Windows.Forms.Timer timer5;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer6;
+        private System.Windows.Forms.Timer timer7;
     }
 }
 
